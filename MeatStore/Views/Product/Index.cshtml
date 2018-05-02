@@ -1,0 +1,33 @@
+﻿
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Showing @Model.Count() Products</h2>
+
+
+<div class="row">
+
+   @foreach(var product in Model)
+   {
+       <div class="col-sm-12 col-md-8 col-lg-4">
+           <h3> @product.Name</h3>
+           <h3> @product.Description</h3>
+           <h3>Organic: @product.Organic</h3>
+           <h4> Grassfed: @product.Grassfed</h4>
+           <h4> @product.Price.Value.ToString("C")</h4>
+           <img class="img-fluid" src="@product.Image" alt="@product.Name" />
+           <a class="btn btn-primary" href="/Product/Details/@product.ID">View Product</a>
+
+
+       </div>
+
+   }
+
+
+
+
+
+</div>
