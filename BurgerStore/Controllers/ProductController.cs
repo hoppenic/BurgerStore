@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MeatStore.Models;
+using BurgerStore.Models;
 
 
-namespace MeatStore.Controllers
+namespace BurgerStore.Controllers
 {
     public class ProductController : Controller
     {
