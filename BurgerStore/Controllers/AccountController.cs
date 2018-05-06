@@ -69,17 +69,23 @@ namespace BurgerStore.Controllers
             //Update your Layout to display the correct links depending on whether the user is logged in / out
 
 
+            //responds on /account/signout
+
+
             public IActionResult SignOut()
             {
-                return BadRequest();
+                return View();  //return signout view here
 
             }
 
+            //responds on /account/signin
             public IActionResult SignIn()
             {
-                return BadRequest();
+                return View();  //return sign in view here
 
             }
+
+
 
             [HttpPost]
             [ValidateAntiForgeryToken]
@@ -92,3 +98,4 @@ namespace BurgerStore.Controllers
         }
     }
 }
+
