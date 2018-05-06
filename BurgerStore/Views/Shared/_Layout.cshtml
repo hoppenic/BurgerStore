@@ -29,26 +29,29 @@
                       <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Shop</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" asp-area="" asp-controller="About" asp-action="About">About</a>
+                      <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" asp-area="" asp-controller="Contact" asp-action="Contact">Contact</a>
+                      <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" asp-area="" asp-controller="Account" asp-action="SignIn">Sign In</a>
                   </li>
 
                   @if (!User.Identity.IsAuthenticated)
-                     {
-                        <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Register" asp-action="Sign Up">Sign Up</a>
-                        </li>
-                    }
-                    else
-                   {
+    {
+              <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Sign Up">Sign Up</a>
+              </li>
+}
+else
+{
 
-                        <li class="nav-item">
-                     <a class="nav-link">Sign Out as @User.Identity.Name</a>
-                        </li>
+              <li class="nav-item">
+                  <a class="nav-link">Sign Out as @User.Identity.Name</a>
+              </li>
 
-                    }
+}
 
 
               </ul>

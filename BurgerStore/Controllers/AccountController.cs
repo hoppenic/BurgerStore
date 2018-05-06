@@ -4,6 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+
+
 
 namespace BurgerStore.Controllers
 {
@@ -38,7 +47,7 @@ namespace BurgerStore.Controllers
 
         //Responds on POST /account/register
         [HttpPost]
-        [ValidateAntiForgeryToken] //this prevents automated scripts from trying to login
+        [ValidateAntiForgeryToken] //this prevents automated scripts from trying to register
         public IActionResult Register(Models.RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -52,50 +61,56 @@ namespace BurgerStore.Controllers
                 }
                 else
                 {
-                    foreach(var error in creationResult.Errors)
+                    foreach (var error in creationResult.Errors)
                     {
                         ModelState.AddModelError(error.Code, error.Description);
                     }
                 }
-              
+
             }
 
             return View();
+        }
 
-            //Weekend Challenge here
-            //Create the Views and any additional Models required for the functionality below
-            //Check the methods on UserManager and SignInManager to figure out how to do this!!
-            //Beware of online examples!  Things might be renamed in code you read, or it might be DotNetFramework4.6
-            //Update your Layout to display the correct links depending on whether the user is logged in / out
-
-
-            //responds on /account/signout
+        //Weekend Challenge here
+        //Create the Views and any additional Models required for the functionality below
+        //Check the methods on UserManager and SignInManager to figure out how to do this!!
+        //Beware of online examples!  Things might be renamed in code you read, or it might be DotNetFramework4.6
+        //Update your Layout to display the correct links depending on whether the user is logged in / out
 
 
-            public IActionResult SignOut()
-            {
-                return View();  //return signout view here
+        //responds on /account/signout
 
-            }
-
-            //responds on /account/signin
-            public IActionResult SignIn()
-            {
-                return View();  //return sign in view here
-
-            }
-
-
-
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public IActionResult SignIn(Object model)
-             {
-            return BadRequest();
-
-             }
+        public IActionResult SignOut()
+        {
+            return View();
 
         }
+
+        public IActionResult SignIn()
+        {
+            return View();
+
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public IActionResult SignIn(Object Model)
+        {
+            return View();
+
+        }
+
+
+
+
+
+
     }
-}
+    }
+
+
+
 
