@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BurgerStore.Models
 {
-    public class SignOut
+    public class SignOutViewModel
     {
 
 

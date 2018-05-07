@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Account";
+    ViewData["Title"] = "Register";
 }
 
 <br />
@@ -11,24 +11,24 @@
     <div class="alert alert-danger">
         <ul>
             @foreach (var error in ViewData.ModelState.Values.SelectMany(m => m.Errors))
-    {
-        <li>@error.ErrorMessage</li>
+            {
+                <li>@error.ErrorMessage</li>
 
-}
+            }
         </ul>
     </div>
 
 }
-
-<form method="post">
+    
+< <form method="post" asp-action="Register" asp-controller="Account">
     <div class="form-group">
         <label for="InputEmail"> Email Address</label>
-        <input name="Email" class="form-control" type="email"  />
+        <input name="Email" class="form-control" type="email" />
     </div>
 
     <div class="form-group">
-      <label for="Input Password"> Password</label>
-      <input name="Password" class="form-control" type="password" />
+        <label for="Input Password"> Password</label>
+        <input name="Password" class="form-control" type="password" />
     </div>
 
     <div>

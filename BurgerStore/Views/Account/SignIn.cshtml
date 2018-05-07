@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SignIn>
+﻿
 
 @{
     ViewData["Title"] = "SignIn";
@@ -22,9 +22,9 @@
 }
 
 
-    <form method="post">
+    <form method="post" asp-action="SignIn" asp-controller="Account">
         <div class="form-group">
-            <label for="InputEmail"> Email Address</label>
+            <label for="Email"> Email Address</label>
             <input name="Email" class="form-control" type="email" />
         </div>
 

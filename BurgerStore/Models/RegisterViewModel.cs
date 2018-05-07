@@ -9,9 +9,12 @@ namespace BurgerStore.Models
     {
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MinLength(5, ErrorMessage = "You need to make your username at least 5 letters.")]
+        [System.ComponentModel.DataAnnotations.MaxLength(50)]
         public string Email { get; set; }
 
-        [System.ComponentModel.DataAnnotations.MinLength(8,ErrorMessage ="Password must be at least 8 characters in length.")]
+   
+
         [System.ComponentModel.DataAnnotations.Required]
         public string Password { get; set; }
 

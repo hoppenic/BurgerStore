@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace BurgerStore.Models
 {
-    public class SignIn
+    public class SignInViewModel
     {
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Email { get; set; }
 
