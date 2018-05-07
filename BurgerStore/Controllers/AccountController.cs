@@ -23,13 +23,10 @@ namespace BurgerStore.Controllers
 
         }
 
-
-
         public IActionResult Index()
         {
             return View();
         }
-
 
         //Responds on GET /account/register
         public IActionResult Register()
@@ -102,16 +99,16 @@ namespace BurgerStore.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult SignIn(Models.SignInViewModel Model)
+        public IActionResult SignIn(SignInViewModel Model)
         {
             if (ModelState.IsValid)
             {
 
-                IdentityUser existingUser = this._signInManager.UserManager.FindByNameAsync(model.Email).Result;
+                IdentityUser existingUser = this._signInManager.UserManager.FindByNameAsync(Model.Email).Result;
                 
                 if (existingUser != null)
                 {
-                    Microsoft.AspNetCore.Identity.SignInResult passwordResult = this._signInManager.CheckPasswordSignInAsync(existingUser, model.Password, false).Result;
+                    Microsoft.AspNetCore.Identity.SignInResult passwordResult = this._signInManager.CheckPasswordSignInAsync(existingUser, Model.Password, false).Result;
                     if (passwordResult.Succeeded)
                     {
                         this._signInManager.SignInAsync(existingUser, false).Wait();
