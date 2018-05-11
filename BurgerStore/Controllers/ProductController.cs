@@ -103,11 +103,11 @@ namespace BurgerStore.Controllers
             //This is the details method connecting to details view
             public IActionResult Details(int? ID)
             {
-                if (ID.HasValue)
-                {
-                    Product p = null;
+            if (ID.HasValue)
+            {
+                Product p = null;
 
-                 using(System.Data.SqlClient.SqlConnection connection = new System.Data.SqlClient.SqlConnection(_AdventureWorks2016ConnectionString))
+                using (System.Data.SqlClient.SqlConnection connection = new System.Data.SqlClient.SqlConnection(_AdventureWorks2016ConnectionString))
                 {
                     connection.Open();
                     System.Data.SqlClient.SqlCommand command = connection.CreateCommand();
@@ -118,41 +118,45 @@ namespace BurgerStore.Controllers
 
                     using (System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader())
                     {
-                        ID=reader.GetInt32(0),
-                        Name=reader.GetString(1),
-                        Description=reader.GetString(2),
-                        Price =reader.GetInt32(3),
-                        Organic=reader.GetBoolean(4),
-                        Grassfed=reader.GetBoolean(5)
-                                    
+                        ID = reader.GetInt32(0),
+                        Name = reader.GetString(1),
+                        Description = reader.GetString(2),
+                        Price = reader.GetInt32(3),
+                        Organic = reader.GetBoolean(4),
+                        Grassfed = reader.GetBoolean(5)
+
+
                     };
 
                 }
-                
-                
-                    while (reader.Read())
+
+                while (reader.Read())
+                {
+                    p = new Product
                     {
-                        p = new Product
-                        {
-                            ID = reader.GetInt32(0),
-                            Name = reader.GetString(1),
-                            Description = reader.GetString(2),
-                            Price = reader.GetInt32(3),
-                            Organic = reader.GetBoolean(4),
-                            Grassfed = reader.GetBoolean(5),
-                        };
+                        ID = reader.GetInt32(0),
+                        Name = reader.GetString(1),
+                        Description = reader.GetString(2),
+                        Price = reader.GetInt32(3),
+                        Organic = reader.GetBoolean(4),
+                        Grassfed = reader.GetBoolean(5),
+                    };
 
-                    }
+                }
 
-
-                    reader.Close();
+            }
+                  
 
                     if (p != null)
                     {
-                        System.Data.SqlClient.SqlCommand imageAndPriceCommand = connection.CreateCommand();
-                        imageAndPriceCommand.CommandText = "sp_GetProductImages";
-                        imageAndPriceCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                        imageAndPriceCommand.Parameters.AddWithValue("@productModelID", p.ID);
+                using (System.Data.SqlClient.SqlCommand imageAndPriceCommand =connection.CreateCommand())
+                {
+                    imageAndPriceCommand.CommandText=
+
+
+
+                }
+                    
 
                         System.Data.SqlClient.SqlDataReader reader2 = imageAndPriceCommand.ExecuteReader();
                         while (reader2.Read())
