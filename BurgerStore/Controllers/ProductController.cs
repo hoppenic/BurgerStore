@@ -12,86 +12,11 @@ namespace BurgerStore.Controllers
     {
 
     
-        private List<Product> _products;
+      
 
         public ProductController()
         {
 
-
-            //new test
-
-            _products = new List<Product>();
-
-            //these are lists
-            _products.Add(new Product
-            {
-                ID = 1,
-                Name = " Traditional Ground Beef Burger",
-                Description = "Ground Beef",
-                Image = " ",
-                Price = 5.99m,
-                Organic = false,
-                Grassfed=false
-            });
-
-            _products.Add(new Product
-            {
-                ID = 2,
-                Name = "Organic Grassfed Ground Beef Burger",
-                Description = "Organic Grassfed Ground Beef",
-                Image = " ",
-                Price = 7.99m,
-                Organic = true,
-                Grassfed = true
-
-            });
-
-            _products.Add(new Product
-            {
-                ID = 3,
-                Name = " Ground Turkey Burger",
-                Description = "Ground Turkey",
-                Image = " ",
-                Price = 3.99m,
-                Organic = false,
-                Grassfed=false
-
-            });
-
-            _products.Add(new Product
-            {
-                ID = 4,
-                Name = " Salmon Burger",
-                Description = "Ground Salmon",
-                Image = " ",
-                Price = 6.99m,
-                Organic = false,
-                Grassfed=false
-            });
-
-            _products.Add(new Product
-            {
-                ID = 5,
-                Name = "Ostrich Burger",
-                Description = "Ground Ostrich",
-                Image = " ",
-                Price = 10.99m,
-                Organic = false,
-                Grassfed = false
-
-            });
-
-            _products.Add(new Product
-            {
-                ID = 6,
-                Name = " Organic Chicken Burger",
-                Description = " Organic Ground Chicken",
-                Image = " ",
-                Price=4.99m,
-                Organic=true,
-                Grassfed=false
-
-            });
 
         }
 
@@ -99,8 +24,62 @@ namespace BurgerStore.Controllers
 
         public IActionResult Index()
         {
-            return View(_products);
+
+            List<Product> products = new List<Product>();
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AdventureWorks2016;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            System.Data.SqlClient.SqlConnection connection = new System.Data.SqlClient.SqlConnection(connectionString);
+            connection.Open();
+
+            System.Data.SqlClient.SqlCommand command = connection.CreateCommand();
+
+            command.CommandText="SELECT Production.ProductModel.ProductModelID,[ID], ["name"],["description"],["price"],["organic"],["grassfed"] FROM Production.Productmodel INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID WHERE CultureID = 'en'";
+
+            System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id= reader.GetInt32(0);
+                string name = reader.GetString(1);
+                string description = reader.GetString(2);
+                int price = reader.GetInt32(3);
+                bool organic = reader.GetBoolean(4);
+                bool grassfed = reader.GetBoolean(5);
+                products.Add(new Product
+                {
+                    ID = id,
+                    Description=description,
+                    Name=name,
+                    Price=price,
+                    Organic=organic,
+                    Grassfed=grassfed,                 
+                });
+
+            }
+            reader.Close();
+
+            foreach(var product in products)
+            {
+                System.Data.SqlClient.SqlCommand imageAndPriceCommand = connection.CreateCommand();
+                +imageAndPriceCommand.CommandText = @"SELECT ListPrice, Production.ProductPhoto.LargePhoto FROM Production.Product INNER JOIN Production.ProductProductPhoto ON Production.Product.ProductID = Production.ProductProductPhoto.ProductID
+                +INNER JOIN Production.ProductPhoto ON Production.ProductPhoto.ProductPhotoID = Production.ProductProductPhoto.ProductPhotoID
+                    +WHERE Production.ProductProductPhoto.[Primary] = 1 AND Production.Product.ProductModelID =" + product.ID;
+                +System.Data.SqlClient.SqlDataReader reader2 = imageAndPriceCommand.ExecuteReader();
+                +                while (reader2.Read())
+                {
+                    product.Price = reader2.IsDBNull(0) ? (decimal?)null :reader2.GetSqlMoney(0).ToDecimal();
+                    byte[] imageBytes = (byte[])reader2[1];
+                    product.Image = "data:image/jpeg;base64, " + Convert.ToBase64String(imageBytes);
+                     break;
+                }
+
+                reader2.Close();
+            }
+
+
+
         }
+
+        
 
         //This is the details method connecting to details view
         public IActionResult Details(int? ID)
