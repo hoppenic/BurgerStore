@@ -26,6 +26,8 @@ namespace BurgerStore
         {
             //these are not part of .NET Core, they are separate libraries installed through NuGet
             //Right click on your project>manage nuget packages
+
+            Configuration.GetConnectionString("AdventureWorks2016");
             services.AddDbContext<IdentityDbContext>(opt => opt.UseInMemoryDatabase("Identities"));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
