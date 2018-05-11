@@ -17,6 +17,9 @@ namespace BurgerStore.Controllers
         public ProductController()
         {
 
+
+            //new
+
             _products = new List<Product>();
 
             //these are lists
