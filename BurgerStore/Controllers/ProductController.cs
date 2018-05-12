@@ -92,8 +92,6 @@ namespace BurgerStore.Controllers
 
         }
 
-
-
         public IActionResult Index()
         {
             return View(_products);

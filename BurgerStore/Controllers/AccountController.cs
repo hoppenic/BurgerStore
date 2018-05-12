@@ -71,11 +71,7 @@ namespace BurgerStore.Controllers
             return View();
         }
 
-        //Weekend Challenge here
-        //Create the Views and any additional Models required for the functionality below
-        //Check the methods on UserManager and SignInManager to figure out how to do this!!
-        //Beware of online examples!  Things might be renamed in code you read, or it might be DotNetFramework4.6
-        //Update your Layout to display the correct links depending on whether the user is logged in / out
+        
 
 
         public IActionResult SignOut()
