@@ -35,7 +35,7 @@ namespace BurgerStore.Controllers
             {
                 ID = 2,
                 Name = "Organic Grassfed Ground Beef Burger",
-                Description = "Organic Grassfed Ground Beef",
+                Description = " Ground Organic Grassfed Beef",
                 Image = " ",
                 Price = 7.99m,
                 Organic = true,
@@ -82,7 +82,7 @@ namespace BurgerStore.Controllers
             {
                 ID = 6,
                 Name = " Organic Chicken Burger",
-                Description = " Organic Ground Chicken",
+                Description = " Ground Organic Chicken",
                 Image = " ",
                 Price=4.99m,
                 Organic=true,
