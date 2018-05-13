@@ -118,59 +118,45 @@ namespace BurgerStore.Controllers
 
                     using (System.Data.SqlClient.SqlDataReader reader = command.ExecuteReader())
                     {
-                        ID = reader.GetInt32(0),
-                        Name = reader.GetString(1),
-                        Description = reader.GetString(2),
-                        Price = reader.GetInt32(3),
-                        Organic = reader.GetBoolean(4),
-                        Grassfed = reader.GetBoolean(5)
 
-
-                    };
-
-                }
-
-                while (reader.Read())
-                {
-                    p = new Product
-                    {
-                        ID = reader.GetInt32(0),
-                        Name = reader.GetString(1),
-                        Description = reader.GetString(2),
-                        Price = reader.GetInt32(3),
-                        Organic = reader.GetBoolean(4),
-                        Grassfed = reader.GetBoolean(5),
-                    };
-
-                }
-
-            }
-                  
-
-                    if (p != null)
-                    {
-                using (System.Data.SqlClient.SqlCommand imageAndPriceCommand =connection.CreateCommand())
-                {
-                    imageAndPriceCommand.CommandText=
-
-
-
-                }
-                    
-
-                        System.Data.SqlClient.SqlDataReader reader2 = imageAndPriceCommand.ExecuteReader();
-                        while (reader2.Read())
+                        while (reader.Read())
                         {
-                            p.Price = reader2.IsDBNull(0) ? (decimal?)null : reader2.GetSqlMoney(0).ToDecimal();
-                            byte[] imageBytes = (byte[])reader2[1];
-                            p.Image = "data:image/jpeg;base64, " + Convert.ToBase64String(imageBytes);
-                            break;
+                            p = new Product
+                            {
+                                ID = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                Description = reader.GetString(2),
+                                Price = reader.GetInt32(3),
+                                Organic = reader.GetBoolean(4),
+                                Grassfed = reader.GetBoolean(5)
+                            };
+
                         }
-                        reader2.Close();
 
                     }
 
-                    connection.Close();
+                    if (p != null)
+                    {
+
+                        using (System.Data.SqlClient.SqlCommand imageAndPriceCommand = connection.CreateCommand())
+                        {
+                            imageAndPriceCommand.CommandText = "sp_getProductImages";
+                            imageAndPriceCommand.CommandType = System.Data.CommandType.StoredProcedure;
+                            imageAndPriceCommand.Parameters.AddWithValue("@productModelID", p.ID);
+                            using (System.Data.SqlClient.SqlDataReader reader2 = imageAndPriceCommand.ExecuteReader())
+                            {
+                                while (reader2.Read())
+                                {
+                                    p.Price = reader2.IsDBNull(0) ? (decimal?)null : reader2.GetSqlMoney(0).ToDecimal();
+                                    byte[] imageBytes = (byte[])reader2[1];
+                                    p.Image = "data:image/jpeg;base64, " + Convert.ToBase64String(imageBytes);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+             
 
                     if (p != null)
                     {
@@ -184,6 +170,6 @@ namespace BurgerStore.Controllers
 
 
 
-        }
+     }
 
-    }
+ }
