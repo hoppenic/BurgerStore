@@ -10,91 +10,90 @@ namespace BurgerStore.Controllers
 {
     public class ProductController : Controller
     {
+        private BurgerStoreDbContext _burgerStoreDbContext;
+        //private List<Product> _products;
 
-    
-        private List<Product> _products;
-
-        public ProductController()
+        public ProductController(Models.BurgerStoreDbContext burgerStoreDbContext)   //injection
         {
+            _burgerStoreDbContext = burgerStoreDbContext;
+            //_products = new List<Product>();
 
-            _products = new List<Product>();
+            ////these are lists
+            //_products.Add(new Product
+            //{
+            //    ID = 1,
+            //    Name = " Traditional Ground Beef Burger",
+            //    Description = "Ground Beef",
+            //    Image = " ",
+            //    Price = 5.99m,
+            //    Organic = false,
+            //    Grassfed=false
+            //});
 
-            //these are lists
-            _products.Add(new Product
-            {
-                ID = 1,
-                Name = " Traditional Ground Beef Burger",
-                Description = "Ground Beef",
-                Image = " ",
-                Price = 5.99m,
-                Organic = false,
-                Grassfed=false
-            });
+            //_products.Add(new Product
+            //{
+            //    ID = 2,
+            //    Name = "Organic Grassfed Ground Beef Burger",
+            //    Description = " Ground Organic Grassfed Beef",
+            //    Image = " ",
+            //    Price = 7.99m,
+            //    Organic = true,
+            //    Grassfed = true
 
-            _products.Add(new Product
-            {
-                ID = 2,
-                Name = "Organic Grassfed Ground Beef Burger",
-                Description = " Ground Organic Grassfed Beef",
-                Image = " ",
-                Price = 7.99m,
-                Organic = true,
-                Grassfed = true
+            //});
 
-            });
+            //_products.Add(new Product
+            //{
+            //    ID = 3,
+            //    Name = " Ground Turkey Burger",
+            //    Description = "Ground Turkey",
+            //    Image = " ",
+            //    Price = 3.99m,
+            //    Organic = false,
+            //    Grassfed=false
 
-            _products.Add(new Product
-            {
-                ID = 3,
-                Name = " Ground Turkey Burger",
-                Description = "Ground Turkey",
-                Image = " ",
-                Price = 3.99m,
-                Organic = false,
-                Grassfed=false
+            //});
 
-            });
+            //_products.Add(new Product
+            //{
+            //    ID = 4,
+            //    Name = " Salmon Burger",
+            //    Description = "Ground Salmon",
+            //    Image = " ",
+            //    Price = 6.99m,
+            //    Organic = false,
+            //    Grassfed=false
+            //});
 
-            _products.Add(new Product
-            {
-                ID = 4,
-                Name = " Salmon Burger",
-                Description = "Ground Salmon",
-                Image = " ",
-                Price = 6.99m,
-                Organic = false,
-                Grassfed=false
-            });
+            //_products.Add(new Product
+            //{
+            //    ID = 5,
+            //    Name = "Ostrich Burger",
+            //    Description = "Ground Ostrich",
+            //    Image = " ",
+            //    Price = 10.99m,
+            //    Organic = false,
+            //    Grassfed = false
 
-            _products.Add(new Product
-            {
-                ID = 5,
-                Name = "Ostrich Burger",
-                Description = "Ground Ostrich",
-                Image = " ",
-                Price = 10.99m,
-                Organic = false,
-                Grassfed = false
+            //});
 
-            });
+            //_products.Add(new Product
+            //{
+            //    ID = 6,
+            //    Name = " Organic Chicken Burger",
+            //    Description = " Ground Organic Chicken",
+            //    Image = " ",
+            //    Price=4.99m,
+            //    Organic=true,
+            //    Grassfed=false
 
-            _products.Add(new Product
-            {
-                ID = 6,
-                Name = " Organic Chicken Burger",
-                Description = " Ground Organic Chicken",
-                Image = " ",
-                Price=4.99m,
-                Organic=true,
-                Grassfed=false
-
-            });
+            //});
 
         }
 
         public IActionResult Index()
         {
-            return View(_products);
+            return View(_burgerStoreDbContext.Products);
         }
 
         //This is the details method connecting to details view
@@ -102,7 +101,7 @@ namespace BurgerStore.Controllers
         {
             if (ID.HasValue)
             {
-                Product p = _products.Single(x => x.ID == ID.Value);
+                Product p = _burgerStoreDbContext.Products.Single(x => x.ID == ID.Value);
                 return View(p);
             }
             return NotFound();
