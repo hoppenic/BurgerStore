@@ -2,6 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic;
+
+
+
 
 namespace BurgerStore.Controllers
 {
@@ -9,11 +15,11 @@ namespace BurgerStore.Controllers
     
     {
 
-        SignInManager<IdentityUser> _signInManager;
+        SignInManager<BurgerStoreUser> _signInManager;
 
 
         //using microsoft.aspnetcore.identity
-        public AccountController(SignInManager<IdentityUser> signInManager)
+        public AccountController(SignInManager<BurgerStoreUser> signInManager)
         {
 
             this._signInManager = signInManager;
@@ -38,9 +44,17 @@ namespace BurgerStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser newEmail = new IdentityUser(model.Email);
-                newEmail.Email = model.Email;
-                IdentityResult creationResult = this._signInManager.UserManager.CreateAsync(newEmail).Result;
+                BurgerStoreUser newEmail = new BurgerStoreUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.PhoneNumber
+                };
+                
+                IdentityResult creationResult= this._signInManager.UserManager.CreateAsync(newEmail).Result;
+
                 if (creationResult.Succeeded)
                 {
                  IdentityResult passwordResult = this._signInManager.UserManager.AddPasswordAsync(newEmail, model.Password).Result;
@@ -97,7 +111,7 @@ namespace BurgerStore.Controllers
             if (ModelState.IsValid)
             {
 
-                IdentityUser existingUser = this._signInManager.UserManager.FindByNameAsync(Model.Email).Result;
+                BurgerStoreUser existingUser = this._signInManager.UserManager.FindByNameAsync(Model.Email).Result;
                 
                 if (existingUser != null)
                 {

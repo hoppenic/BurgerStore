@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using BurgerStore.Models;
 
 namespace BurgerStore
 {
@@ -24,12 +25,17 @@ namespace BurgerStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //these are not part of .NET Core, they are separate libraries installed through NuGet
-            //Right click on your project>manage nuget packages
-            services.AddDbContext<IdentityDbContext>(opt => opt.UseInMemoryDatabase("Identities"));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDbContext>()
+            Configuration.GetConnectionString("burgerStore");
+            string burgerStoreConnectionString = Configuration.GetConnectionString("burgerStore");
+
+        
+            services.AddDbContext<BurgerStoreDbContext>(opt => opt.UseSqlServer(burgerStoreConnectionString));
+
+          
+
+            services.AddIdentity<BurgerStoreUser, IdentityRole>()
+                .AddEntityFrameworkStores<BurgerStoreDbContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>

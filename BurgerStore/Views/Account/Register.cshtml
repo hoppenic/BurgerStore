@@ -1,4 +1,5 @@
-﻿
+﻿@model RegisterViewModel
+
 @{
     ViewData["Title"] = "Register";
 }
@@ -21,6 +22,20 @@
 }
     
 < <form method="post" asp-action="Register" asp-controller="Account">
+
+    <div class="form-group">
+        <label for="Input First Name"> First Name</label>
+        <input name="FirstName" class="form-control" type="text" />
+    </div>
+    <div class="form-group">
+        <label for="Input Last Name"> Last Name</label>
+        <input name="LastName" class="form-control" type="text" />
+    </div>
+    <div class="form-group">
+        <label for="Input Phone Number"> Phone Number</label>
+        <input name="PhoneNumber" class="form-control" type="text" />
+    </div>
+
     <div class="form-group">
         <label for="InputEmail"> Email Address</label>
         <input name="Email" class="form-control" type="email" />
