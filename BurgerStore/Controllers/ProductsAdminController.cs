@@ -6,16 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BurgerStore.Models;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace BurgerStore.Controllers
 {
     public class ProductsAdminController : Controller
     {
         private readonly BurgerStoreDbContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public ProductsAdminController(BurgerStoreDbContext context)
+        public ProductsAdminController(BurgerStoreDbContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: ProductsAdmin
@@ -85,12 +89,23 @@ namespace BurgerStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,Price,Image,Organic,Grassfed")] Product product)
+        public async Task<IActionResult> Edit(int id, Product product,Microsoft.AspNetCore.Http.IFormFile imageFile)
         {
             if (id != product.ID)
             {
                 return NotFound();
             }
+
+            string newFile = System.IO.Path.Combine(_env.WebRootPath, "images", imageFile.FileName);
+
+            System.IO.FileInfo newFileInfo = new System.IO.FileInfo(newFile);
+            using(System.IO.FileStream fs = newFileInfo.Create())
+            {
+                imageFile.CopyTo(fs);
+                fs.Close();
+            }
+
+            product.Image = "/images/" + imageFile.FileName;
 
             if (ModelState.IsValid)
             {
