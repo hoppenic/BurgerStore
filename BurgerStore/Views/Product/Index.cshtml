@@ -12,17 +12,23 @@
 
    @foreach(var product in Model)
    {
-       <div class="col-sm-12 col-md-8 col-lg-4">
-           <h3> @product.Name</h3>
-           <h3> @product.Description</h3>
-           <h3>Organic: @product.Organic</h3>
-           <h4> Grassfed: @product.Grassfed</h4>
-           <h4> @product.Price.Value.ToString("C")</h4>
-           <img class="img-fluid" src="@product.Image" alt="@product.Name" />
-           <a class="btn btn-primary" href="/Product/Details/@product.ID">View Product</a>
+    <div class="col-sm-12 col-md-8 col-lg-4">
+        <h3> @product.Name</h3>
+        <img class="img-fluid" src="@product.Image" alt="@product.Name" />
+        <p> @product.Description</p>
+        <h3>Organic: @product.Organic</h3>
+        <h4> Grassfed: @product.Grassfed</h4>
+        <h4> @product.Price.Value.ToString("C")</h4>
+        <a class="btn btn-primary" href="/Product/Details/@product.ID">View Product</a>
+        <form method="post" asp-action="Details">
+            <input name="Id" value="@product.ID" type="hidden" />
+            <input type="submit" class="btn btn-primary" value="Add to Cart" />
+        </form>
 
 
-       </div>
+
+
+    </div>
 
    }
 

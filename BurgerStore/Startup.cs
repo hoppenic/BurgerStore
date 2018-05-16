@@ -76,7 +76,7 @@ namespace BurgerStore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, BurgerStoreDbContext db)
         {
             if (env.IsDevelopment())
             {
@@ -92,6 +92,8 @@ namespace BurgerStore
             app.UseAuthentication();
 
             app.UseStaticFiles();
+
+            DbInitializer.Initialize(db);
 
             app.UseMvc(routes =>
             {
