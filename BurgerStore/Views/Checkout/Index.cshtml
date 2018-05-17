@@ -1,0 +1,62 @@
+﻿@model CheckoutViewModel
+
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Welcome to Flavor Town!</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(m => m.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+
+            }
+        </ul>
+    </div>
+}
+
+    <form method="post" asp-action="Index" asp-controller="Checkout">
+
+        <div class="form-group">
+            <label for="Credit Card Number"> Credit Card Number</label>
+            <input name="ccNumber" class="form-control" type="number" />
+        </div>
+        <div class="form-group">
+            <label for="Credit Card Verification Code"> Credit Card Verification Number</label>
+            <input name="ccVerify" class="form-control" type="number" />
+        </div>
+        <div class="form-group">
+            <label for="Name on Credit Card"> Name on Credit Card</label>
+            <input name="nameOnCard" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label for="Billing Address"> Billing Address</label>
+            <input name="billAddress" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label for="State"> State</label>
+            <input name="state" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label for="City"> City</label>
+            <input name="city" class="form-control" type="text" />
+        </div>
+        <div class="form-group">
+            <label for="Phone Number">Phone Number</label>
+            <input name="phoneNumber" class="form-control" type="text" />
+        </div>
+
+
+
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+
+
+    </form>

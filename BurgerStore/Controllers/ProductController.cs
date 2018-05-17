@@ -29,17 +29,18 @@ namespace BurgerStore.Controllers
             {
                 if(Guid.TryParse(Request.Cookies["cartId"], out cartId))
                 {
-                    cart = _burgerStoreDbContext.Carts.FirstOrDefault(x => x.CookieIdentifier == cartId);
+                    cart = _burgerStoreDbContext.Carts.Include(carts => carts.CartItems).ThenInclude(cartitems => cartitems.Product).FirstOrDefault(x => x.CookieIdentifier == cartId);
                 }
             }
-                if(cart==null)
+
+            if (cart==null)
             {
                 cart = new Cart();
                 cartId = Guid.NewGuid();
                 cart.CookieIdentifier = cartId;
 
                 _burgerStoreDbContext.Carts.Add(cart);
-                Response.Cookies.Append("cartId", cartId.ToString(), new Microsoft.AspNetCore.Http.CookieOptions { Expires = DateTime.MaxValue });
+                Response.Cookies.Append("cartId", cartId.ToString(), new Microsoft.AspNetCore.Http.CookieOptions { Expires = DateTime.UtcNow.AddYears(100) });
 
             }
             CartItem item = cart.CartItems.FirstOrDefault(x => x.Product.ID == 2);
@@ -51,12 +52,10 @@ namespace BurgerStore.Controllers
             }
 
             item.Quantity+=quantity;
-            
-
             cart.LastModified = DateTime.Now;
 
             _burgerStoreDbContext.SaveChanges();
-            return Ok();
+            return RedirectToAction("Index", "Cart");
         }
 
         public IActionResult Index()

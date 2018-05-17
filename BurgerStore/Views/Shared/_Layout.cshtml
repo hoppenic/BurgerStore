@@ -15,7 +15,7 @@
 <body>
 
         <nav class="navbar navbar-default navbar-dark bg-success">
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Burger Store</a>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Flavor Town Burgers</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,7 +26,13 @@
                       <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                   </li>
                   <li class="nav-item">
+                      <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">Cart</a>
+                  </li>
+                  <li class="nav-item">
                       <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Shop</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" asp-area="" asp-controller="Checkout" asp-action="Index">Checkout</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
@@ -35,25 +41,25 @@
                       <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                   </li>
 
-                 <!-- need to figure out how to hide this once I'm logged in-->
+                  <!-- need to figure out how to hide this once I'm logged in-->
                   <li class="nav-item">
                       <a class="nav-link" asp-area="" asp-controller="Account" asp-action="SignIn">Sign In</a>
                   </li>
 
                   @if (!User.Identity.IsAuthenticated)
-    {
-              <li class="nav-item">
-                  <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
-              </li>
-}
-else
-{
+                  {
+                      <li class="nav-item">
+                          <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Sign Up</a>
+                      </li>
+                  }
+                  else
+                  {
 
-              <li class="nav-item">
-                  <a class="nav-link" asp-area=" " asp-controller="Account" asp-action="SignOut">Sign Out as @User.Identity.Name</a>
-              </li>
+                      <li class="nav-item">
+                          <a class="nav-link" asp-area=" " asp-controller="Account" asp-action="SignOut">Sign Out as @User.Identity.Name</a>
+                      </li>
 
-}
+                  }
 
 
               </ul>
@@ -79,7 +85,7 @@ else
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - BurgerStore</p>
+            <p>&copy; 2018 - Flavor Town Burgers</p>
         </footer>
     </div>
 

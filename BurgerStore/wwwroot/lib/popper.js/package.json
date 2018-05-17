@@ -29,7 +29,9 @@
   "types": "index.d.ts",
   "scripts": {
     "prepare": "yarn build",
-    "postpublish": "nuget-publish && ./bower-publish.sh",
+    "postpublish": "
+      
+      -publish && ./bower-publish.sh",
     "prebuild": "yarn lint",
     "pretest": "yarn lint",
     "build": "node bundle.js",

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BurgerStore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BurgerStore.Controllers
 {
