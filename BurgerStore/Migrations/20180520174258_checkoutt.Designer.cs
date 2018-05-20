@@ -11,9 +11,10 @@ using System;
 namespace BurgerStore.Migrations
 {
     [DbContext(typeof(BurgerStoreDbContext))]
-    partial class BurgerStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180520174258_checkoutt")]
+    partial class checkoutt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

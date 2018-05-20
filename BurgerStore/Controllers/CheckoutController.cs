@@ -21,19 +21,8 @@ namespace BurgerStore.Controllers
         // GET: ProductsAdmin/Create
         public IActionResult Index()
         {
-         
-            Guid cartId;
-            Cart cart = null; ;
-            if (Request.Cookies.ContainsKey("cartId"))
-            {
-                if(Guid.TryParse(Request.Cookies["cartId"], out cartId))
-                {
-                    cart = _burgerStoreDbContext.Carts.Include(carts => carts.CartItems).ThenInclude(cartitems => cartitems.Product).FirstOrDefault(x => x.CookieIdentifier == cartId);
-                }
-            }
 
-           
-            return View(cart);
+            return View();
 
         }
 
