@@ -93,7 +93,7 @@ namespace BurgerStore
 
             app.UseStaticFiles();
 
-            DbInitializer.Initialize(db);
+            //DbInitializer.Initialize(db);  //commented this out as dbinitializer throwing errors
 
             app.UseMvc(routes =>
             {

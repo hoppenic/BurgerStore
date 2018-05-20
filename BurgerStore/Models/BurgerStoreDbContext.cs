@@ -26,8 +26,6 @@ namespace BurgerStore.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
 
-        
-
 
     }
 
@@ -63,6 +61,7 @@ namespace BurgerStore.Models
 
     public class Order
     {
+        public int ID { get; set; }
         public double ccNumber { get; set; }
         public int ccVerify { get; set; }
         public string nameOnCard { get; set; }
@@ -71,8 +70,6 @@ namespace BurgerStore.Models
         public string city { get; set; }
         public double phoneNumber { get; set; }
 
-
-
     }
 
     public class OrderItem
@@ -80,10 +77,6 @@ namespace BurgerStore.Models
         public int ID { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
-
-
-
-
 
     }
 

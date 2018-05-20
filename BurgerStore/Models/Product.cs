@@ -19,7 +19,5 @@ namespace BurgerStore.Models
         //can add many more properties here for my project
 
 
-
-
     }
 }
