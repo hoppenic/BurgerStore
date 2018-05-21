@@ -18,10 +18,10 @@ namespace BurgerStore.Controllers
         }
 
 
-        // GET: ProductsAdmin/Create
+        // GET: /Checkout
         public IActionResult Index()
         {
-
+            
             return View();
 
         }
@@ -29,7 +29,7 @@ namespace BurgerStore.Controllers
 
 
         //HTTPPost
-        public IActionResult Checkout()
+        public IActionResult Submit()
         {
 
             return View();

@@ -19,9 +19,6 @@ namespace BurgerStore.Controllers
 
 
 
-
-
-
         public IActionResult Index()
         {
             Guid cartId;

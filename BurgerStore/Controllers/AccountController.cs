@@ -6,26 +6,18 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 
-
-
-
 namespace BurgerStore.Controllers
 {
     public class AccountController : Controller   
     
     {
 
-
-
         SignInManager<BurgerStoreUser> _signInManager;
-
 
         //using microsoft.aspnetcore.identity
         public AccountController(SignInManager<BurgerStoreUser> signInManager)
         {
-
             this._signInManager = signInManager;
-
         }
 
         public IActionResult Index()
@@ -42,7 +34,7 @@ namespace BurgerStore.Controllers
         //Responds on POST /account/register
         [HttpPost]
         [ValidateAntiForgeryToken] //this prevents automated scripts from trying to register
-        public IActionResult Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +47,7 @@ namespace BurgerStore.Controllers
                     PhoneNumber = model.PhoneNumber
                 };
                 
-                IdentityResult creationResult= this._signInManager.UserManager.CreateAsync(newEmail).Result;
+                IdentityResult creationResult= await this._signInManager.UserManager.CreateAsync(newEmail);
 
                 if (creationResult.Succeeded)
                 {

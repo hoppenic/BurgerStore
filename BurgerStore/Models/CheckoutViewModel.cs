@@ -37,12 +37,6 @@ namespace BurgerStore.Models
         public int phoneNumber { get; set; }
 
       
-        
-
-
-
-
-
 
 
 

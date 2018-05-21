@@ -75,6 +75,7 @@ namespace BurgerStore.Models
     public class OrderItem
     {
         public int ID { get; set; }
+        public Cart cart { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
 
