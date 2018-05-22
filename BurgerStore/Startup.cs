@@ -74,6 +74,14 @@ namespace BurgerStore
 
             services.AddMvc();
             services.AddTransient((x) => { return new EmailService(Configuration["SendGridKey"]); });
+            services.AddTransient((x) => {
+                return new Braintree.BraintreeGateway(
+                Configuration["BraintreeEnvironment"],
+                Configuration["BraintreeMerchantId"],
+                Configuration["BraintreePublicKey"],
+                Configuration["BraintreePrivateKey"]);
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,20 +10,44 @@ namespace BurgerStore.Controllers
 {
     public class CheckoutController : Controller
     {
-        private readonly BurgerStoreDbContext _burgerStoreDbContext;
+        private  BurgerStoreDbContext _burgerStoreDbContext;
+        private EmailService _emailService;
 
-        public CheckoutController(BurgerStoreDbContext burgerstoredbcontext)
+        public CheckoutController(BurgerStoreDbContext burgerstoredbcontext, EmailService emailService)
         {
-            _burgerStoreDbContext = burgerstoredbcontext;
+
+            this._burgerStoreDbContext = burgerstoredbcontext;
+            this._emailService = emailService;
+
         }
 
 
         // GET: /Checkout
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View();
 
+            CheckoutViewModel model = new CheckoutViewModel();
+            Guid cartId;
+            Cart cart = null;
+
+            if (Request.Cookies.ContainsKey("cartId"))
+            {
+                if(Guid.TryParse(Request.Cookies["cartId"],out cartId))
+                {
+                    cart = await _burgerStoreDbContext.Carts
+                        .Include(carts => carts.CartItems)
+                        //.ThenInclude(cartitems.Product)
+                        .FirstOrDefaultAsync(x => x.CookieIdentifier == cartId);
+                }
+            }
+            if (cart == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            model.Cart = cart;
+
+            return View(model);
         }
 
 
