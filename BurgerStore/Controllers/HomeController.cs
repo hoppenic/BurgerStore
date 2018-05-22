@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BurgerStore.Models;
 using Microsoft.AspNetCore.Mvc;
-using BurgerStore.Models;
-using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace BurgerStore.Controllers
 {
@@ -25,10 +20,8 @@ namespace BurgerStore.Controllers
         public IActionResult Contact()
         {
            
-
             return View();
         }
-
 
         public IActionResult Error()
         {
