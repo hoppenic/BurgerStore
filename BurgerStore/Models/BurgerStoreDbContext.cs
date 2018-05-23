@@ -61,22 +61,34 @@ namespace BurgerStore.Models
 
     public class Order
     {
-        public int ID { get; set; }
-        public double ccNumber { get; set; }
-        public int ccVerify { get; set; }
-        public string nameOnCard { get; set; }
-        public string billAddress { get; set; }
-        public string state { get; set; }
-        public string city { get; set; }
-        public double phoneNumber { get; set; }
+        public Order()
+        {
+            this.OrderItems= new HashSet<OrderItem>();
+        }
 
+        public int ID { get; set; }
+        public string TrackingNumber { get; set; }
+        public DateTime OrderDate { get; set; }
+
+        public string ContactEmail { get; set; }
+        public string ContactPhoneNumber { get; set; }
+        public string ShippingAddress { get; set; }
+        public string ShippingLocale { get; set; }
+        public string ShippingRegion { get; set; }
+        public string ShippingCountry { get; set; }
+        public string ShippingPostalCode { get; set; }
+
+
+        public ICollection<OrderItem> OrderItems { get; set; }
     }
 
     public class OrderItem
     {
         public int ID { get; set; }
-        public Cart cart { get; set; }
-        public Product Product { get; set; }
+        public Order Order { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public decimal ProductPrice { get; set; }
         public int Quantity { get; set; }
 
     }

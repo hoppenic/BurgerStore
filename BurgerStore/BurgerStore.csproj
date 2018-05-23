@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180523141623_Orders.cs" />
+    <Compile Remove="Migrations\20180523141623_Orders.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Braintree" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />

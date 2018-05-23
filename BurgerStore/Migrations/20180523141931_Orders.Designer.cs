@@ -11,8 +11,8 @@ using System;
 namespace BurgerStore.Migrations
 {
     [DbContext(typeof(BurgerStoreDbContext))]
-    [Migration("20180520174258_checkoutt")]
-    partial class checkoutt
+    [Migration("20180523141931_Orders")]
+    partial class Orders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,19 +115,23 @@ namespace BurgerStore.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("billAddress");
+                    b.Property<string>("ContactEmail");
 
-                    b.Property<double>("ccNumber");
+                    b.Property<string>("ContactPhoneNumber");
 
-                    b.Property<int>("ccVerify");
+                    b.Property<DateTime>("OrderDate");
 
-                    b.Property<string>("city");
+                    b.Property<string>("ShippingAddress");
 
-                    b.Property<string>("nameOnCard");
+                    b.Property<string>("ShippingCountry");
 
-                    b.Property<double>("phoneNumber");
+                    b.Property<string>("ShippingLocale");
 
-                    b.Property<string>("state");
+                    b.Property<string>("ShippingPostalCode");
+
+                    b.Property<string>("ShippingRegion");
+
+                    b.Property<string>("TrackingNumber");
 
                     b.HasKey("ID");
 
@@ -139,13 +143,19 @@ namespace BurgerStore.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ProductID");
+                    b.Property<int?>("OrderID");
+
+                    b.Property<int>("ProductID");
+
+                    b.Property<string>("ProductName");
+
+                    b.Property<decimal>("ProductPrice");
 
                     b.Property<int>("Quantity");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ProductID");
+                    b.HasIndex("OrderID");
 
                     b.ToTable("OrderItems");
                 });
@@ -293,9 +303,9 @@ namespace BurgerStore.Migrations
 
             modelBuilder.Entity("BurgerStore.Models.OrderItem", b =>
                 {
-                    b.HasOne("BurgerStore.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
+                    b.HasOne("BurgerStore.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
