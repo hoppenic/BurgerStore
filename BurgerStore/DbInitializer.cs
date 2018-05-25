@@ -11,6 +11,7 @@ namespace BurgerStore
     {
         internal static void Initialize(this BurgerStoreDbContext db)
         {
+            //Sometimes this has to be commented out if you run into migrations issues
             db.Database.Migrate();
 
             if (db.Products.Count() == 0)

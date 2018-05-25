@@ -13,15 +13,16 @@ namespace BurgerStore.Controllers
     public class AccountController : Controller   
     {
        
-        SignInManager<BurgerStoreUser> _signInManager;
-        
+        SignInManager<BurgerStoreUser> _signInManager;       
         EmailService _emailService;
+        Braintree.BraintreeGateway _braintreeGateway;
 
         //using microsoft.aspnetcore.identity
-        public AccountController(SignInManager<BurgerStoreUser> signInManager, EmailService emailService)
+        public AccountController(SignInManager<BurgerStoreUser> signInManager, EmailService emailService, Braintree.BraintreeGateway braintreeGateway)
         {
             this._signInManager = signInManager;
             this._emailService = emailService;
+            this._braintreeGateway = braintreeGateway;
         }
 
         public IActionResult Index()
@@ -30,7 +31,6 @@ namespace BurgerStore.Controllers
         }
 
         
-
         //Responds on GET /account/register
         public IActionResult Register()
         {

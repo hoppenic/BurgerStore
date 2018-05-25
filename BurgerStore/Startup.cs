@@ -82,6 +82,15 @@ namespace BurgerStore
                 Configuration["BraintreePrivateKey"]);
 
             });
+
+            //remember to add keys to secrets file
+            services.AddTransient((x) =>
+            {
+                SmartyStreets.ClientBuilder builder = new SmartyStreets.ClientBuilder(Configuration["SmartyStreetsAuthId"], Configuration["SmartyStreetsAuthToken"]);
+                return builder.BuildUsStreetApiClient();
+
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

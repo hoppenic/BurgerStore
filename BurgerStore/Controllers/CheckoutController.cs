@@ -16,14 +16,17 @@ namespace BurgerStore.Controllers
         private EmailService _emailService;
         private SignInManager<BurgerStoreUser> _signInManager;
         private BraintreeGateway _braintreeGateway;
+        private SmartyStreets.USStreetApi.Client _usStreetApiClient;
 
-        public CheckoutController(BurgerStoreDbContext burgerstoredbcontext, EmailService emailService, SignInManager<BurgerStoreUser> signInManager, BraintreeGateway braintreeGateway)
+
+        public CheckoutController(BurgerStoreDbContext burgerstoredbcontext, EmailService emailService, SignInManager<BurgerStoreUser> signInManager, BraintreeGateway braintreeGateway, SmartyStreets.USStreetApi.Client usStreetApiClient)
         {
 
             this._burgerStoreDbContext = burgerstoredbcontext;
             this._emailService = emailService;
             this._signInManager = signInManager;
             this._braintreeGateway = braintreeGateway;
+            this._usStreetApiClient = usStreetApiClient;
 
         }
 
@@ -80,6 +83,8 @@ namespace BurgerStore.Controllers
 
             if (ModelState.IsValid)
             {
+                
+               
                 Order newOrder = new Order
                 {
                     TrackingNumber = Guid.NewGuid().ToString(),
