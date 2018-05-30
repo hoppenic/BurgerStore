@@ -11,7 +11,7 @@ namespace BurgerStore
     {
         internal static void Initialize(this BurgerStoreDbContext db)
         {
-            //Sometimes this has to be commented out if you run into migrations issues
+            //Sometimes this has to be commented out if you run into migrations/db rebuild issues
             db.Database.Migrate();
 
             if (db.Products.Count() == 0)
@@ -20,8 +20,8 @@ namespace BurgerStore
                 {
 
                     Name = "Ground Beef Burger",
-                    Description = "Ground Beef",
-                    Image = " ",
+                    Description = "Our special 80/20 blend of ground beef",
+                    Image = "/images/burger1.jpeg  ",
                     Price = 5.99m,
                     Organic = false,
                     Grassfed = false
@@ -31,8 +31,8 @@ namespace BurgerStore
                 {
 
                     Name = "Organic Grassfed Ground Beef Burger",
-                    Description = "Ground Organic Grassfed Beef",
-                    Image = " ",
+                    Description = "A delicious blend of humanely raised ground organic grassfed beef",
+                    Image = "/images/burger2.jpeg ",
                     Price = 7.99m,
                     Organic = true,
                     Grassfed = true
@@ -41,10 +41,19 @@ namespace BurgerStore
                 {
 
                     Name = "Ground Turkey Burger",
-                    Description = "Ground Turkey",
-                    Image = " ",
+                    Description = "Thanksgiving on the grill!",
+                    Image = "/images/burger3.jpeg ",
                     Price = 3.99m,
                     Organic = false,
+                    Grassfed = false
+                });
+                db.Products.Add(new Product
+                {
+                    Name = "Veggie Burger",
+                    Description = "A healthy and delicous meat alternative for your grilling pleasure!",
+                    Image = "/images/veggieburger.jpeg",
+                    Price = 5.99M,
+                    Organic = true,
                     Grassfed = false
                 });
 

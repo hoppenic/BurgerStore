@@ -89,7 +89,7 @@ namespace BurgerStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Product product,Microsoft.AspNetCore.Http.IFormFile imageFile)
+        public async Task<IActionResult> Edit(int id, Product product, Microsoft.AspNetCore.Http.IFormFile imageFile)
         {
             if (id != product.ID)
             {

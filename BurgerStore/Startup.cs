@@ -32,7 +32,7 @@ namespace BurgerStore
         
             services.AddDbContext<BurgerStoreDbContext>(opt => opt.UseSqlServer(burgerStoreConnectionString));
 
-          
+
 
             services.AddIdentity<BurgerStoreUser, IdentityRole>()
                 .AddEntityFrameworkStores<BurgerStoreDbContext>()
@@ -111,7 +111,7 @@ namespace BurgerStore
 
             app.UseStaticFiles();
 
-            DbInitializer.Initialize(db);  //commented this out as dbinitializer throwing errors??
+            DbInitializer.Initialize(db);  
 
             app.UseMvc(routes =>
             {

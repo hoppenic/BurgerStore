@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BurgerStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BurgerStore.Models;
+using System;
+using System.Linq;
 
 namespace BurgerStore.Controllers
 {
@@ -27,7 +25,7 @@ namespace BurgerStore.Controllers
             {
                 if(Guid.TryParse(Request.Cookies["cartId"], out cartId))
                 {
-                    cart = _burgerStoreDbContext.Carts.Include(carts => carts.CartItems).ThenInclude(cartitems => cartitems.Product).FirstOrDefault(x => x.CookieIdentifier == cartId);
+                       cart = _burgerStoreDbContext.Carts.Include(carts => carts.CartItems).ThenInclude(cartitems => cartitems.Product).FirstOrDefault(x => x.CookieIdentifier == cartId);
                 }
             }
 
