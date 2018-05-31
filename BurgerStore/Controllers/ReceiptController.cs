@@ -25,18 +25,20 @@ namespace BurgerStore.Controllers
 
 
         //GET: Receipt/Index
-        public IActionResult Index(string id)
+        public IActionResult Index()
         {
             return View();
         }
     }
-
-
-
-
-
-
-
-
-    }
 }
+
+
+
+
+
+
+
+
+
+
+  
