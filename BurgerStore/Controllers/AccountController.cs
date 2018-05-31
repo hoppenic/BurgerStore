@@ -156,7 +156,7 @@ namespace BurgerStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPasword(string email)
+        public async Task<IActionResult> ForgotPassword(string email)
         {
 
             if((ModelState.IsValid) && (!string.IsNullOrEmpty(email)))

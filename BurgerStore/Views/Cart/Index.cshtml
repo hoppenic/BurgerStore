@@ -18,39 +18,41 @@ else
     <table class="table table-responsive-md">
         @foreach (var item in Model.CartItems)
         {
-        <tr>
-            <td>@item.Product.Name</td>         
-         
-            <td><img src="@item.Product.Image" class="img-fluid" /></td>          
-            <td>@((item.Product.Price ?? 0).ToString("c"))</td>
-            <td>@item.Quantity</td>
-            <td>@((item.Quantity * (item.Product.Price ?? 0)).ToString("c"))</td>
-            <td>
-                <form method="post" asp-action="remove">
-                    <input type="hidden" name="id" value="@item.ID" />
-                    <input type="submit" value="Remove" class="btn btn-primary" />
-                </form>
+            <tr>
+                <td>@item.Product.Name</td>
+
+                <td><img src="@item.Product.Image" class="img-fluid" /></td>
+                <td>@((item.Product.Price ?? 0).ToString("c"))</td>
+                <td>@item.Quantity</td>
+                <td>@((item.Quantity * (item.Product.Price ?? 0)).ToString("c"))</td>
+                <td>
+                    <form method="post" asp-action="remove">
+                        <input type="hidden" name="id" value="@item.ID" />
+                        <input type="submit" value="Remove From Cart" class="btn btn-primary" />
+                    </form>
 
 
-                <br />
+              
 
-
-
-                <form method="post">
-                    <input type="submit" class="btn btn-primary" value="Shop More" asp-area="" asp-controller="Product" asp-action="Index">
-                </form>
-
-                <br />
-
-
-                <form method="post">
-                    <input type="submit" class="btn btn-primary" value="Checkout" asp-area="" asp-controller="Checkout" asp-action="Index">
-                </form>
-
-            </td>
-        </tr>
+                </td>
+            </tr>
 
         }
-    </table>
+          
+                
+                    <div class="col-md-6">
+                        <form method="get">
+                            <input type="submit" class="btn btn-primary" value="Shop More" asp-area="" asp-controller="Product" asp-action="Index">
+                        </form>
+                    </div>
 
+                    <div class="col-md-6">
+                        <form method="get">
+                            <input type="submit" class="btn btn-primary" value="Checkout" asp-area="" asp-controller="Checkout" asp-action="Index">
+                        </form>
+                    </div>
+                
+            
+
+    </table>
 }

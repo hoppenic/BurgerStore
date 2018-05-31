@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-8">
-        
+
         <div asp-validation-summary="All"></div>
         <form method="post" id="checkout">
             <div class="card">
@@ -46,12 +46,12 @@
                     <h5 class="card-title">Shipping</h5>
                 </div>
                 <div class="card-body collapse" id="shipping" data-parent="#checkout">
-                   
+
                     <div class="form-group">
                         <label asp-for="ShippingAddress"></label>
                         <input type="text" asp-for="ShippingAddress" required class="form-control" />
                     </div>
-                    
+
                     <div class="form-group">
                         <label asp-for="ShippingLocale"></label>
                         <input type="text" asp-for="ShippingLocale" required class="form-control" />
@@ -74,9 +74,9 @@
                     </div>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        
+
                     }
-                    
+
                     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#billing">Next</button>
                 </div>
             </div>
@@ -122,18 +122,20 @@
                                     <option value="@i">@i.ToString()</option>
 
                                 }
-                                </select>
-                       
-                    </div>
-                    <button class="btn btn-primary">Place Order</button>
-                </div>
-            </div>
+                            </select>
 
+                        </div>
+                        <button class="btn btn-primary" asp-controller="Receipt" asp-action="index">Place Order</button>
+                        <div>
+                            </div>
+                     
+                        <br />
 
         </form>
+      
     </div>
-    <div class="col-4">
-        <table class="table table-dark">
+    <div class="col-6">
+        <table class="table table-success">
             <thead>
                 <tr>
                     <th>Item</th>

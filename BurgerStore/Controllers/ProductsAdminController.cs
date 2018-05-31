@@ -57,10 +57,22 @@ namespace BurgerStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Description,Price,Image,Organic,Grassfed")] Product product)
+        public async Task<IActionResult> Create(Product product, Microsoft.AspNetCore.Http.IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {
+
+                string newFile = System.IO.Path.Combine(_env.WebRootPath, "images", imageFile.FileName);
+
+                System.IO.FileInfo newFileInfo = new System.IO.FileInfo(newFile);
+                using (System.IO.FileStream fs = newFileInfo.Create())
+                {
+                    imageFile.CopyTo(fs);
+                    fs.Close();
+                }
+
+                product.Image = "/images/" + imageFile.FileName;
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
