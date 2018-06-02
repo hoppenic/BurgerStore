@@ -32,27 +32,28 @@ else
                     </form>
 
 
-              
+
 
                 </td>
             </tr>
 
         }
-          
-                
-                    <div class="col-md-6">
-                        <form method="get">
-                            <input type="submit" class="btn btn-primary" value="Shop More" asp-area="" asp-controller="Product" asp-action="Index">
-                        </form>
-                    </div>
-
-                    <div class="col-md-6">
-                        <form method="get">
-                            <input type="submit" class="btn btn-primary" value="Checkout" asp-area="" asp-controller="Checkout" asp-action="Index">
-                        </form>
-                    </div>
-                
-            
-
     </table>
+          
+  
+    <div class="row">
+        <div class="col-md-4 col-lg-6">
+            <form method="get">
+                <input type="submit" class="btn btn-primary" value="Shop More" asp-area="" asp-controller="Product" asp-action="Index">
+                <input type="submit" class="btn btn-primary" value="Checkout" asp-area="" asp-controller="Checkout" asp-action="Index">
+
+            </form>
+        </div>
+
+        
+
+    </div>
+    
+
+   
 }
