@@ -20,14 +20,18 @@ namespace BurgerStore.Models
 
         [Required]
         [Phone]
+        [MinLength(10,ErrorMessage ="Must be at least ten numbers")]
+        [MaxLength(10,ErrorMessage ="Must be no more than ten numbers")]
         public string PhoneNumber { get; set; }
 
         
         [Required]
+        [MinLength(2,ErrorMessage ="Must be no less than two characters.")]
         public string FirstName { get; set; }
 
 
         [Required]
+        [MinLength(2,ErrorMessage ="Must be no less than two characters")]
         public string LastName { get; set; }
 
 
