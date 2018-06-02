@@ -15,12 +15,13 @@ namespace BurgerStore.Models
 
         public string Description { get; set; }
 
+
         [Display(Name="Price/lb")]
         public decimal? Price { get; set; }
 
         public string Image { get; set; }
 
-       
+        
         public bool Organic { get; set; }
 
        
