@@ -7,33 +7,34 @@
 
 
 
-
 <div class="row">
 
-   @foreach(var product in Model)
-   {
-    <div class="col-sm-12 col-md-8 col-lg-4">
-        <h1> @product.Name</h1>
-        <img class="img-fluid" src="@product.Image" alt="@product.Name" />
-        <h2> @product.Description</h2>
-        <p>Organic?: @product.Organic</p>
-        <p> Grassfed?: @product.Grassfed</p>
-        <p> Delicious?: Absolutely</p>
-        <p> Price/lb: @product.Price.Value.ToString("C")</p>
-        <a class="btn btn-primary" href="/Product/Details/@product.ID">View Product</a>
-        <br />
-        <br />
-        <form method="post" asp-action="Details">
-            <input name="Id" value="@product.ID" type="hidden" />
-            <input type="submit" class="btn btn-primary" value="Add to Cart" />
-        </form>
+
+
+    @foreach (var product in Model)
+    {
+        <div class="col-sm-12 col-md-8 col-lg-4">
+            <h1> @product.Name</h1>
+            <img class="img-fluid" src="@product.Image" alt="@product.Name" />
+            <h2> @product.Description</h2>
+            <p>Organic?: @product.Organic</p>
+            <p> Grassfed?: @product.Grassfed</p>
+            <p> Delicious?: Absolutely</p>
+            <p> Price/lb: @product.Price.Value.ToString("C")</p>
+            <a class="btn btn-primary" href="/Product/Details/@product.ID">View Product</a>
+            <br />
+            <br />
+            <form method="post" asp-action="Details">
+                <input name="Id" value="@product.ID" type="hidden" />
+                <input type="submit" class="btn btn-primary" value="Add to Cart" />
+            </form>
 
 
 
 
-    </div>
+        </div>
 
-   }
+    }
 
 
 
