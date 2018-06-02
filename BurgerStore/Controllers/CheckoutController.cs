@@ -106,10 +106,14 @@ namespace BurgerStore.Controllers
 
                 };
 
+
+                //this is our braintree transaction section
+
                 TransactionRequest transaction = new TransactionRequest
                 {
                     //Amount = 1,
                     Amount = model.Cart.CartItems.Sum(x => x.Quantity * (x.Product.Price ?? 0)),
+
                     CreditCard = new TransactionCreditCardRequest
                     {
                         Number = model.BillingCardNumber,

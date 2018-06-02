@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Extensions;
 using System;
+using Braintree;
 
 
 namespace BurgerStore.Controllers
@@ -57,9 +58,47 @@ namespace BurgerStore.Controllers
 
                 if (creationResult.Succeeded)
                 {
+               
+
                  IdentityResult passwordResult = await this._signInManager.UserManager.AddPasswordAsync(newEmail, model.Password);
                     if (passwordResult.Succeeded)
                     {
+
+                        Braintree.CustomerSearchRequest search = new Braintree.CustomerSearchRequest();
+                        search.Email.Is(model.Email);
+                        var searchResult = await _braintreeGateway.Customer.SearchAsync(search);
+                        if(searchResult.Ids.Count == 0)
+                        {
+                            //creating a new braintree customer here
+                            await _braintreeGateway.Customer.CreateAsync(new Braintree.CustomerRequest
+                            {
+                                Email = model.Email,
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                Phone = model.PhoneNumber
+
+
+                            });
+                        }
+                        else
+                        {
+                            //update the existing braintree customer
+
+                            Braintree.Customer existingCustomer = searchResult.FirstItem;
+                            await _braintreeGateway.Customer.UpdateAsync(existingCustomer.Id, new Braintree.CustomerRequest
+                            {
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                Phone = model.PhoneNumber
+
+
+                            });
+
+
+                        }
+                            
+
+
                         var confirmationToken = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(newEmail);
 
                         confirmationToken = System.Net.WebUtility.UrlEncode(confirmationToken);
