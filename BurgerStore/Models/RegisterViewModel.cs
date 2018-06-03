@@ -10,11 +10,11 @@ namespace BurgerStore.Models
     {
         [EmailAddress]
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MinLength(5, ErrorMessage = "User name must be at least 5 characters.")]
-        [System.ComponentModel.DataAnnotations.MaxLength(25, ErrorMessage ="Must be no more than 24 characters.")]
+        [System.ComponentModel.DataAnnotations.MinLength(5, ErrorMessage = "Must be at least five characters.")]
+        [System.ComponentModel.DataAnnotations.MaxLength(50, ErrorMessage ="Must be no more than fifty characters.")]
         public string Email { get; set; }
 
-        [MinLength(8, ErrorMessage ="Password must be at least 8 characters.")]
+        [MinLength(8, ErrorMessage ="Must be at least eight characters.")]
         [System.ComponentModel.DataAnnotations.Required]
         public string Password { get; set; }
 

@@ -45,6 +45,8 @@ namespace BurgerStore.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                //this is creating my new user.  I simply used email only rather than username
                 BurgerStoreUser newEmail = new BurgerStoreUser
                 {
                     UserName = model.Email,
