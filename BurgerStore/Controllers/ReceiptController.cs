@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BurgerStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Extensions;
+using Braintree;
+
 
 namespace BurgerStore.Controllers
 {
     public class ReceiptController : Controller
     {
+     
 
         SignInManager<BurgerStoreUser> _signInManager;
         EmailService _emailService;
@@ -27,7 +32,17 @@ namespace BurgerStore.Controllers
         //GET: Receipt/Index
         public IActionResult Index()
         {
-            return View();
+
+            //check to see that my CheckoutviewModel is validly filled out
+            if (ModelState.IsValid)
+            {
+
+              return View();
+            }
+            else
+            {
+                
+            }
         }
     }
 }

@@ -43,6 +43,8 @@ namespace BurgerStore.Controllers
         [ValidateAntiForgeryToken] //this prevents automated scripts from trying to register
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+
+            //Check to confirm that my register model is filled out correctly
             if (ModelState.IsValid)
             {
 
