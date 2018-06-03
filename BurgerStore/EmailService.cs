@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 namespace BurgerStore
 {
 
+
+    //this is largely all using sendgrid
+
     public class SendEmailResult
     {
         public bool Success { get; set; }
@@ -25,7 +28,7 @@ namespace BurgerStore
         public async Task<SendEmailResult> SendEmailAsync(string recipient, string subject, string htmlContent, string plainTextContent)
         {
 
-            var from = new SendGrid.Helpers.Mail.EmailAddress("admin@flavortownburgers", "Coding Temple Burgers");
+            var from = new SendGrid.Helpers.Mail.EmailAddress("admin@flavortownburgers", "Flavor Town Burgers");
             var to = new SendGrid.Helpers.Mail.EmailAddress(recipient);
             var message = SendGrid.Helpers.Mail.MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             message.SetTemplateId("bd93b262-7f59-4ceb-a9ad-73f64ab6526e");

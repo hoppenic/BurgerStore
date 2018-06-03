@@ -3,6 +3,7 @@
     ViewData["Title"] = "Index";
 
     decimal tax = (Model.Cart.CartItems.Sum(x => x.Product.Price * x.Quantity) ?? 0) * .10m;
+    decimal shipping = 5m;
 }
 
 @if (Model.Cart.CartItems.Count == 0)
@@ -102,17 +103,17 @@ else
                         <div class="form-row">
                             <div class="form-group col-8">
                                 <label asp-for="BillingCardNumber"></label>
-                                <input type="text" asp-for="BillingCardNumber" required class="form-control" maxlength="16" placeholder="e.g. 4111111111111111" />
+                                <input type="text" asp-for="BillingCardNumber" required class="form-control" minlength="16" maxlength="16" placeholder="e.g. 4111111111111111" />
                             </div>
                             <div class="form-group col-4">
                                 <label asp-for="BillingCardVerificationValue"></label>
-                                <input type="text" asp-for="BillingCardVerificationValue" required class="form-control" maxlength="3" placeholder="e.g. 123" />
+                                <input type="text" asp-for="BillingCardVerificationValue" required class="form-control" minlength="3" maxlength="3" placeholder="e.g. 123" />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-8">
                                 <label asp-for="NameOnCard"></label>
-                                <input type="text" asp-for="NameOnCard" required class="form-control" placeholder="e.g. Burger Lover 1" />
+                                <input type="text" asp-for="NameOnCard" required class="form-control" placeholder="e.g. Burger Lover" />
                             </div>
                             <div class="form-group col-2">
                                 <label asp-for="BillingCardExpirationMonth"></label>
@@ -141,8 +142,7 @@ else
                                 <br />
                             </div>
                             
-                            <div>
-                            </div>
+                           
 
                             
 
@@ -189,7 +189,7 @@ else
                     </tr>
                     <tr>
                         <th colspan="3">Shipping</th>
-                        <th>Free  ;)</th>
+                        <th>Free ;)</th>
                     </tr>
                     <tr>
                         <th colspan="3">Total</th>

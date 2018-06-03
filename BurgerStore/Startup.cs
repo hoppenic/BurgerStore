@@ -111,6 +111,7 @@ namespace BurgerStore
 
             app.UseStaticFiles();
 
+            //seeding database
             DbInitializer.Initialize(db);  
 
             app.UseMvc(routes =>
