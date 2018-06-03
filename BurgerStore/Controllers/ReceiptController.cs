@@ -37,10 +37,18 @@ namespace BurgerStore.Controllers
             if (ModelState.IsValid)
             {
 
+                //just show them up mocked up receipt page
               return View();
             }
+
             else
             {
+                //foreach(var error in ....  )
+                //this is wrong, I had to just leave it for the meantime.
+                return View();
+
+
+
                 
             }
         }
