@@ -8,6 +8,9 @@ namespace BurgerStore.Models
 {
     public class RegisterViewModel
     {
+
+        //model validation
+
         [EmailAddress]
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.MinLength(5, ErrorMessage = "Must be at least five characters.")]
@@ -21,7 +24,7 @@ namespace BurgerStore.Models
         [Required]
         [Phone]
         [MinLength(10,ErrorMessage ="Must be at least ten numbers")]
-        [MaxLength(10,ErrorMessage ="Must be no more than ten numbers")]
+        [MaxLength(10,ErrorMessage ="Must be no more than ten numbers.")]
         public string PhoneNumber { get; set; }
 
         
@@ -31,7 +34,7 @@ namespace BurgerStore.Models
 
 
         [Required]
-        [MinLength(2,ErrorMessage ="Must be no less than two characters")]
+        [MinLength(2,ErrorMessage ="Must be no less than two characters.")]
         public string LastName { get; set; }
 
 
