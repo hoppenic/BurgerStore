@@ -36,7 +36,6 @@ namespace BurgerStore.Controllers
             //check to see that my CheckoutviewModel is validly filled out
             if (ModelState.IsValid)
             {
-
                 //just show them up mocked up receipt page
               return View();
             }
@@ -46,8 +45,6 @@ namespace BurgerStore.Controllers
                 //foreach(var error in ....  )
                 //this is wrong, I had to just leave it for the meantime.
                 return View();
-
-
 
                 
             }
