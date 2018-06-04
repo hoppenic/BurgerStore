@@ -24,6 +24,7 @@ else
         <div class="col-8">
 
             <div asp-validation-summary="All"></div>
+            <--! this is where my controller is --> 
             <form method="post" id="checkout">
                 <div class="card">
                     <div class="card-header" data-toggle="collapse" data-target="#contact">
@@ -143,11 +144,8 @@ else
                             </div>
     
 
-            </form>
-
-            <form>
-                <div>
-                    <button class="btn btn-primary" asp-controller="Receipt" asp-action="Index">Place Order</button>
+                           <div>
+                    <button class="btn btn-primary" >Place Order</button>
                 </div>
             </form>
 

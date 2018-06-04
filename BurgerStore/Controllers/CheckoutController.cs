@@ -135,6 +135,7 @@ namespace BurgerStore.Controllers
                     _burgerStoreDbContext.CartItems.RemoveRange(model.Cart.CartItems);
                     _burgerStoreDbContext.Carts.Remove(model.Cart);
                     await _burgerStoreDbContext.SaveChangesAsync();
+
                     //Try to checkout
                     Response.Cookies.Delete("cartId");
                     return RedirectToAction("Index", "Receipt", new { id = newOrder.TrackingNumber });
