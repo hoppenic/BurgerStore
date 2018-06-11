@@ -47,9 +47,19 @@
                   </li>
 
                   <!-- need to figure out how to hide this once I'm logged in-->
-                  <li class="nav-item">
-                      <a class="nav-link" asp-area="" asp-controller="Account" asp-action="SignIn">Sign In</a>
-                  </li>
+                  @if (User.Identity.IsAuthenticated)
+                  {
+                      <li></li>
+
+                  }
+                  else
+                  {
+                      <li class="nav-item">
+                          <a class="nav-link" asp-area="" asp-controller="Account" asp-action="SignIn">Sign In</a>
+                      </li>
+
+                  }
+
 
                   @if (!User.Identity.IsAuthenticated)
                   {
