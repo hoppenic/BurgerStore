@@ -9,6 +9,7 @@
 <h2>Please Register</h2>
 @if (!ViewData.ModelState.IsValid)
 {
+
     <div class="alert alert-danger">
         <ul>
             @foreach (var error in ViewData.ModelState.Values.SelectMany(m => m.Errors))
@@ -17,39 +18,41 @@
 
             }
         </ul>
-    </div>
-
-}
-    
-    <form method="post" asp-controller="Account" asp-action="Register">
-
-    <div class="form-group">
-        <label for="Input First Name"> First Name</label>
-        <input name="FirstName" class="form-control" type="text" />
-    </div>
-    <div class="form-group">
-        <label for="Input Last Name"> Last Name</label>
-        <input name="LastName" class="form-control" type="text" />
-    </div>
-    <div class="form-group">
-        <label for="Input Phone Number"> Phone Number</label>
-        <input name="PhoneNumber" class="form-control" type="text" />
-    </div>
-
-    <div class="form-group">
-        <label for="InputEmail"> Email Address</label>
-        <input name="Email" class="form-control" type="email" />
-    </div>
-
-    <div class="form-group">
-        <label for="Input Password"> Password</label>
-        <input name="Password" class="form-control" type="password" />
-    </div>
-
-    <div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+        </div>
 
 
-</form>
+
+  }
+
+        <form method="post" asp-controller="Account" asp-action="Register">
+
+            <div class="form-group">
+                <label for="First Name"> First Name</label>
+                <input name="FirstName" class="form-control" type="text" />
+            </div>
+            <div class="form-group">
+                <label for="Input Last Name"> Last Name</label>
+                <input name="LastName" class="form-control" type="text" />
+            </div>
+            <div class="form-group">
+                <label for="Input Phone Number"> Phone Number</label>
+                <input name="PhoneNumber" class="form-control" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label for="InputEmail"> Email Address</label>
+                <input name="Email" class="form-control" type="email" />
+            </div>
+
+            <div class="form-group">
+                <label for="Input Password"> Password</label>
+                <input name="Password" class="form-control" type="password" />
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+
+        </form>
 
